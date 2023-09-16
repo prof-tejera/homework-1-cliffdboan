@@ -26,6 +26,7 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
     let filteredColor = colorObj;
 
     // using each parameter, pull out whatever color is being called for using .filter
+    // force all type to lower case to prevent case sensitivity
     if (name) {
       filteredColor = filteredColor.filter((color) =>
         color.name.toLowerCase().includes(name.toLowerCase())
@@ -38,6 +39,7 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
         );
     }
 
+    // to access the nested objects, use .some before setting filter parameters
     if (compName) {
       filteredColor = filteredColor.filter((color) =>
         color.comp.some(obj => obj.name.toLowerCase().includes(compName.toLowerCase())
@@ -52,6 +54,7 @@ const fetchColors = async ({ name, hex, compName, compHex }) => {
 
     // return the color that is called for by its test case
     return filteredColor;
+
     // throw an error and send a message if the test fails
   } catch (error) {
     throw Error(`Error: ${error.message}`);
